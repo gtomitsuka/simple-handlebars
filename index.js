@@ -61,7 +61,7 @@ module.exports = function(_settings){
       if(error)
         done(error, null);
 
-      if(settings.caches == true){
+      if(settings.caches == true)
         cache[name] = settings.handlebars.compile(file);
 
       done(null, cache[name](context));
