@@ -16,8 +16,8 @@ module.exports = function(_settings){
   if(settings.extension == null)
     settings.extension = '.hbs';
 
-  if(settings.caches == null)
-    settings.caches = false;
+  if(typeof settings.caches !== 'boolean')
+    settings.caches = process.env.NODE_ENV === 'production' ? true : false;
 
   function handlePartials(array){
     async.forEach(array, function(file, done){
