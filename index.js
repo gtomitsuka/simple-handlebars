@@ -1,5 +1,9 @@
 /* by Gabriel Tomitsuka. Licensed under MIT license. */
 
+//Node.js Modules
+var fs = require('fs');
+var path = require('path');
+
 //NPM Modules
 var Handlebars = require('handlebars');
 var async = require('async');
