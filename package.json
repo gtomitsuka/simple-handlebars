@@ -1,0 +1,29 @@
+{
+  "name": "simple-handlebars",
+  "version": "1.0.0",
+  "description": "Simple Handlebars engine for Express",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gtomitsuka/simple-handlebars.git"
+  },
+  "keywords": [
+    "express",
+    "engine",
+    "partials",
+    "handler",
+    "simple",
+    "to-use",
+    "handlebars",
+    "fast"
+  ],
+  "author": "Gabriel Tomitsuka <gabriel.tomitsuka@montreus.com> (http://blog.montreus.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gtomitsuka/simple-handlebars/issues"
+  },
+  "homepage": "https://github.com/gtomitsuka/simple-handlebars"
+}
