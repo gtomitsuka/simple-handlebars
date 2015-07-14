@@ -1,6 +1,6 @@
 {
   "name": "simple-handlebars",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple Handlebars engine for Express",
   "main": "index.js",
   "scripts": {
