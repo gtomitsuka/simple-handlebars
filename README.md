@@ -27,6 +27,6 @@ options:
 
 `extension` - the file extension you're using. Usually `.hbs` or `.handlebars`. By default uses `.hbs`. This property is ignored if you send an array to `partials`
 
-`handlebars` - if you need a different Handlebars implementation. By default uses [npm install handlebars](http://npmjs.com/package/handlebars)
+`handlebars` - if you need a different Handlebars implementation. By default uses [handlebars](http://npmjs.com/package/handlebars)
 
 `caches` - By default, simple-handlebars only pre-compiles/caches if process.env.PRODUCTION is true.
