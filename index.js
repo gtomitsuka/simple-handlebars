@@ -41,7 +41,7 @@ module.exports = function(_settings){
       files.forEach(function(file){
         var ext = path.extname(file);
         if(ext === settings.extension)
-          partials.push(file);
+          partials.push(path.join(settings.partials, file));
       })
 
       handlePartials(partials);
