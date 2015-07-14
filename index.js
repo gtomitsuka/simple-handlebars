@@ -25,7 +25,7 @@ module.exports = function(_settings){
         if(error)
           throw error;
 
-        settings.handlebars.registerPartial(path.basename(file, ext), content);
+        settings.handlebars.registerPartial(path.basename(file, settings.extension), content);
         done();
       });
     });
