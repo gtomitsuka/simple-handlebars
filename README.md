@@ -29,4 +29,4 @@ options:
 
 `handlebars` - if you need a different Handlebars implementation. By default uses [handlebars](http://npmjs.com/package/handlebars)
 
-`caches` - By default, simple-handlebars only pre-compiles/caches if process.env.PRODUCTION is true.
+`caches` - By default, simple-handlebars only pre-compiles/caches if process.env.NODE_ENV is 'production'.
