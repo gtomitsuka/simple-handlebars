@@ -2,11 +2,11 @@
 
 `npm install simple-handlebars`
 
-simple-handlebars is a Handlebars engine designed for simplicity, made for [express](http://expressjs.com). It supports partials, multiple extensions(like `.hbs` and `.handlebars`) and view caching/pre-compiling for a great performance.
+simple-handlebars is a Handlebars engine designed for simplicity, made for [express](http://expressjs.com). It supports partials, multiple extensions(like `.hbs` and `.handlebars`) and view caching for a maximum performance.
 
 # How to Use
 
-``` javascript
+```javascript
 var app = require('express')();
 var hbs = require('simple-handlebars');
 
@@ -29,4 +29,4 @@ options:
 
 `handlebars` - if you need a different Handlebars implementation. By default uses [handlebars](http://npmjs.com/package/handlebars)
 
-`caches` - By default, simple-handlebars only pre-compiles/caches if process.env.NODE_ENV is 'production'.
+`caches` - By default, simple-handlebars only caches if process.env.NODE_ENV is 'production'.
