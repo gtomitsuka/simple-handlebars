@@ -15,7 +15,7 @@ app.engine('hbs', hbs({
   partials: __dirname + '/views/partials',
   extension: '.hbs'
 }));
-app.set('view engine', 'hbs');
+
 app.set('views', __dirname + '/views');
 ```
 
@@ -31,3 +31,25 @@ options:
 `handlebars` - if you need a different Handlebars implementation. By default uses [handlebars](http://npmjs.com/package/handlebars)
 
 `caches` - By default, simple-handlebars only caches if process.env.NODE_ENV is 'production'.
+
+## hbs#registerHelper(name, fnc)
+
+Calls `InternalHandlebars.registerHelper(name, fnc)`.
+
+```js
+var app = require('express')();
+var hbs = require('simple-handlebars');
+
+var instance = hbs({
+  partials: __dirname + '/views/partials',
+  extension: '.hbs'
+});
+
+instance.registerHelper('helper', function() {
+  // your helper here
+});
+
+app.engine('hbs', instance);
+
+app.set('views', __dirname + '/views');
+```
