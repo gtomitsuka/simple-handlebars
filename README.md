@@ -1,4 +1,5 @@
 # simple-handlebars
+[![Build Status](https://travis-ci.org/gtomitsuka/simple-handlebars.svg)](https://travis-ci.org/gtomitsuka/simple-handlebars)
 
 `npm install simple-handlebars`
 
