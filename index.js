@@ -1,19 +1,26 @@
 /* by Gabriel Tomitsuka. Licensed under MIT license. */
 
+//Node.js Modules
+var fs = require('fs');
+var path = require('path');
+
 //NPM Modules
 var Handlebars = require('handlebars');
 var async = require('async');
 
-module.exports = function(_settings){
-  var settings = _settings; //Optimization
-  if(settings.handlebars == null)
+module.exports = function(_settings) {
+  var settings = _settings || {}; //Optimization
+
+  var type = typeof settings.handlebars;
+  if(type !== 'function' || type !== 'object')
     settings.handlebars = Handlebars;
 
   if(settings.extension == null)
     settings.extension = '.hbs';
 
-  if(settings.caches == null || process.env.NODE_ENV === 'development')
-    settings.caches = false;
+  settings.caches = settings.caches === true || process.env.NODE_ENV !== 'development';
+
+  var isReady = false;
 
   function handlePartials(array) {
     async.forEach(array, function(file, done) {
@@ -21,9 +28,11 @@ module.exports = function(_settings){
         if(error)
           throw error;
 
-        settings.handlebars.registerPartial(path.basename(file, ext), content);
+        settings.handlebars.registerPartial(path.basename(file, settings.extension), content);
         done();
       });
+    }, function() {
+      isReady = true;
     });
   }
 
@@ -37,19 +46,24 @@ module.exports = function(_settings){
       files.forEach(function(file){
         var ext = path.extname(file);
         if(ext === settings.extension)
-          partials.push(file);
+          partials.push(path.join(settings.partials, file));
       })
 
       handlePartials(partials);
     });
-  }else if(Array.isArray(settings.partials)) {
+  } else if(Array.isArray(settings.partials)) {
     handlePartials(settings.partials)
-  }else if(settings.partials != null) {
+  } else if(settings.partials != null) {
     throw new Error('Handlebars\' partials are invalid.');
+  } else {
+    isReady = true;
   }
 
   var cache = [];
-  return function(name, context, done) {
+  function run(name, context, done) {
+    if(isReady === false)
+     return setTimeout(function() { run(name, context, done)}, 1)
+
     if(settings.caches == true && cache[name])
       return done(null, cache[name](context));
 
@@ -59,10 +73,18 @@ module.exports = function(_settings){
 
       var compiled = settings.handlebars.compile(file);
 
-      if(settings.caches == true){
+      if(settings.caches == true)
         cache[name] = compiled;
 
       done(null, compiled(context));
     });
   }
+
+  run.registerHelper = function() {
+    Handlebars.registerHelper.apply(Handlebars, arguments);
+  }
+
+  run.settings = settings;
+
+  return run;
 }
