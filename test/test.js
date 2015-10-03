@@ -60,6 +60,25 @@ describe('hbs()', function() {
       done();
     });
   });
+
+  describe('#registerHelper()', function() {
+    it('helper works', function(done) {
+      var instance = hbs();
+
+      var random = Math.random();
+      instance.registerHelper('getRandom', function() {
+        return random;
+      });
+
+      instance(path.join(__dirname, '..', 'test-data', 'get-random.hbs'), {}, function(error, response) {
+        if(error)
+          throw error;
+
+        assert.equal(response, random);
+        done();
+      });
+    });
+  });
 });
 
 describe('express()', function() {
