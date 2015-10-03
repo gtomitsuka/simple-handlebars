@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- '0.10'
+- '0.12'
+- '4.1'
+notifications:
+  email: false
+deploy:
+  provider: npm
+  email: gabriel.tomitsuka@montreus.com
+  api_key:
+    secure: EV4BBv3dVQ34xjwv2zwFsZHe2Zg5tAZ7nzPapW07NMmksY93peOBGMIzD3axRUIugD1ymB4Kgnb9EYGZGKFNDi0mHs3+G7lPEsSHBs3Ium5EZ6hzTHCDeCCSAdimqLSGECn3rxarFcwGyPjo0oC+a7ujA7wf/H/XQqjFhj+SRGdQN2wQ8BOD7UpWG56fhCiNdZnkDplqmMyhnjvjNtr7hK8vZ96wvohgOF0QZoGWDuy2QsIeOBhSD9/ANnXwk6jVXKjl4Jh0g54uCmmkfhpHBML0JlCdTbNR5p+DodWCAws0sbtawpvSkrNM/ajl4U1CYdBOcYvas7qiYTGSYLXTeyg99fqX1MB4bEo3jk2Ed+Dr5c0dLw6R/LSe5rdp777vUdDdo6/uhPYCbdFe0nIYxYmSfdudiofOb1Fz0MH/4yOY8lyo7pHdliwPrTZKTdXiyOYnSTv3egtsD1LOA2iNwE9JSNF3LRugMi1w+JzBFKMot3NUF/sY8eRjZgQtabbMcl33Wh6qLmoYaArr/hzMDF/tFRePexC2KXpRVCKr9AI/xCzyImxEwF8vNr5uuZGDgEx+/563GEeSfYA73Ln10/dqRTU1huZikN8WQzLCaLJ0XMnV+Pppgwh2Wd2lhohefXgov8lsl45AR1YKJKy2KN5j2KaEQjFLbt8Hz03VMMA=
+  on:
+    tags: true
+    repo: gtomitsuka/simple-handlebars
