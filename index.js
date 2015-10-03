@@ -12,12 +12,12 @@ module.exports = function(_settings){
   if(settings.extension == null)
     settings.extension = '.hbs';
 
-  if(settings.caches == null)
+  if(settings.caches == null || process.env.NODE_ENV === 'development')
     settings.caches = false;
 
-  function handlePartials(array){
-    async.forEach(array, function(file, done){
-      fs.readFile(file, 'utf8', function(error, content){
+  function handlePartials(array) {
+    async.forEach(array, function(file, done) {
+      fs.readFile(file, 'utf8', function(error, content) {
         if(error)
           throw error;
 
@@ -28,8 +28,8 @@ module.exports = function(_settings){
   }
 
   //Setup partials
-  if(typeof settings.partials === 'string'){
-    fs.readdir(settings.partials, function(error, files){
+  if(typeof settings.partials === 'string') {
+    fs.readdir(settings.partials, function(error, files) {
       if(error)
         throw error;
 
@@ -42,25 +42,27 @@ module.exports = function(_settings){
 
       handlePartials(partials);
     });
-  }else if(Array.isArray(settings.partials)){
+  }else if(Array.isArray(settings.partials)) {
     handlePartials(settings.partials)
-  }else if(settings.partials != null){
+  }else if(settings.partials != null) {
     throw new Error('Handlebars\' partials are invalid.');
   }
 
   var cache = [];
-  return function(name, context, done){
+  return function(name, context, done) {
     if(settings.caches == true && cache[name])
       return done(null, cache[name](context));
 
-    fs.readFile(name, 'utf8', function(error, file){
+    fs.readFile(name, 'utf8', function(error, file) {
       if(error)
         done(error, null);
 
-      if(settings.caches == true){
-        cache[name] = settings.handlebars.compile(file);
+      var compiled = settings.handlebars.compile(file);
 
-      done(null, cache[name](context));
+      if(settings.caches == true){
+        cache[name] = compiled;
+
+      done(null, compiled(context));
     });
   }
 }
